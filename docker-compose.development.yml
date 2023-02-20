@@ -145,8 +145,8 @@ services:
   # Mailhog
   mail:
      image: mailhog/mailhog
-   #  ports:
-   #    - 8025:8025
+     ports:
+       - 8025:8025
      environment:
       - VIRTUAL_HOST=mail.boilerplate.docker
       - VIRTUAL_PORT=8025
@@ -181,16 +181,18 @@ services:
   #######################################
   # phpMyAdmin
   #######################################
-  #phpmyadmin:
-  #  image: phpmyadmin/phpmyadmin
-  #  links:
-  #    - mysql
-  #  environment:
-  #    - PMA_HOSTS=mysql
-  #    - VIRTUAL_HOST=pma.boilerplate.docker
-  #    - VIRTUAL_PORT=80
-  #  volumes:
-  #    - phpmyadmin:/sessions
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mysql
+    ports:
+      - 8001:8000
+    environment:
+      - PMA_HOSTS=mysql
+      - VIRTUAL_HOST=pma.boilerplate.docker
+      - VIRTUAL_PORT=80
+    volumes:
+      - phpmyadmin:/sessions
 
 volumes:
   mysql:
